@@ -1,11 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using xbox_ps_mvc_project.Database;
+using xbox_ps_mvc_project.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddScoped<IGamesService, GamesService>();
 
 builder.Services.AddDbContext<AppDbContext>(
     config => config.UseSqlServer(builder.Configuration.GetConnectionString("Application"))

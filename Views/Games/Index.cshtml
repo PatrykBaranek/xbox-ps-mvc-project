@@ -1,0 +1,13 @@
+﻿@model IEnumerable<xbox_ps_mvc_project.Entities.GamesEntity>
+
+<ul>
+    @foreach(var item in Model)
+    {
+        <li>
+            @item.Title 
+            <img src="@item.PosterUrl"/>
+            <a asp-controller="Games" asp-action="GameDetails" asp-route-id="@item.Id">@item.Title</a>
+        </li>
+        
+    }
+</ul>
