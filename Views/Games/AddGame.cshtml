@@ -1,0 +1,27 @@
+﻿@model xbox_ps_mvc_project.Entities.GamesEntity
+@{
+    ViewData["Title"] = "AddGame";
+}
+
+<form method="POST" asp-action="GameAdded">
+    <div class="form-group">
+        <label asp-for="Title">Title:</label>
+        <input asp-for="Title" class="form-control" required/>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description">Description:</label>
+        <input asp-for="Description" class="form-control" required/>
+    </div>
+    <div class="form-group">
+        <label asp-for="PosterUrl">PosterUrl: </label>
+        <input asp-for="PosterUrl" class="form-control" required/>
+    </div>
+    <div class="form-group">
+        <label asp-for="CoverImgUrl">Cover Img Url:</label>
+        <input asp-for="CoverImgUrl" class="form-control" required/>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Add new game"/>
+    </div>
+</form>

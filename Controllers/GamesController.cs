@@ -17,7 +17,7 @@ namespace xbox_ps_mvc_project.Controllers
         public GamesController(IGamesService gamesService)
         {
             _gamesService = gamesService;
-        } 
+        }
 
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -32,12 +32,26 @@ namespace xbox_ps_mvc_project.Controllers
         {
             var gameDetails = await _gamesService.GameDetails(id);
 
-            if(id == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
             return View(gameDetails);
+        }
+
+        [HttpGet]
+        public IActionResult AddGame()
+        {
+            return View();
+        }
+        
+        [HttpPost]
+        public async Task<IActionResult> GameAdded(string title, string description, string posterUrl, string coverImgUrl)
+        {
+            var newGame = await _gamesService.GameAdded(title, description, posterUrl, coverImgUrl);
+
+            return View(newGame);
         }
 
     }
