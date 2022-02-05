@@ -15,7 +15,6 @@ namespace xbox_ps_mvc_project.Database
 
         public AppDbContext(DbContextOptions options) : base(options)
         {
-
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

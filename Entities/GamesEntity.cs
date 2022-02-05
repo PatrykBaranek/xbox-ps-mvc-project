@@ -16,7 +16,7 @@ namespace xbox_ps_mvc_project.Entities
         public string CoverImgUrl { get; set; }
 
         public int PlatformId { get; set; }
-        public PlatformEntity Platform { get; set; }
+        public virtual PlatformEntity Platform { get; set; }
 
     }
 }

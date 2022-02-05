@@ -33,11 +33,11 @@ namespace xbox_ps_mvc_project.Controllers
         {
             var gameDetails = await _gamesService.GameDetails(id);
 
-            if (id == null)
+            if (id == null || gameDetails == null)
             {
                 return NotFound();
             }
-
+           
             return View(gameDetails);
         }
 
