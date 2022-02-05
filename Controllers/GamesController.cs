@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using xbox_ps_mvc_project.Database;
+using xbox_ps_mvc_project.Entities;
 using xbox_ps_mvc_project.Services;
 
 namespace xbox_ps_mvc_project.Controllers

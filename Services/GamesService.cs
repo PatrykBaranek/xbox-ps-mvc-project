@@ -31,12 +31,12 @@ namespace xbox_ps_mvc_project.Services
             return gamesDetails;
         }
 
-        public async Task<GamesEntity> GameAdded(string title, string description, string posterUrl, string coverImgUrl)
+        public async Task<GamesEntity> GameAdded(string title, string category, string posterUrl, string coverImgUrl)
         {
             var newGame = new GamesEntity()
             {
                 Title = title,
-                Description = description,
+                Category = category,
                 PosterUrl = posterUrl,
                 CoverImgUrl = coverImgUrl
             };
