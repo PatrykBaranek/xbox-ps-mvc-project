@@ -37,20 +37,22 @@ namespace xbox_ps_mvc_project.Controllers
             {
                 return NotFound();
             }
-           
+
             return View(gameDetails);
         }
 
         [HttpGet]
-        public IActionResult AddGame()
+        public async Task<IActionResult> AddGame()
         {
-            return View();
+            var gameViewModel = await _gamesService.AddGame();
+
+            return View(gameViewModel);
         }
-        
+
         [HttpPost]
-        public async Task<IActionResult> GameAdded(string title, string description, string posterUrl, string coverImgUrl)
+        public async Task<IActionResult> GameAdded([FromForm] string title, [FromForm] string description, [FromForm] string posterUrl, [FromForm] string coverImgUrl, [FromForm] int platformSelected, [FromForm] int genreSelected)
         {
-            var newGame = await _gamesService.GameAdded(title, description, posterUrl, coverImgUrl);
+            var newGame = await _gamesService.GameAdded(title, description, posterUrl, coverImgUrl, platformSelected, genreSelected);
 
             return View(newGame);
         }

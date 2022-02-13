@@ -12,7 +12,9 @@ namespace xbox_ps_mvc_project.Database
     {
         public DbSet<GamesEntity> Games { get; set; }
         public DbSet<PlatformEntity> Platforms { get; set; }
+        public DbSet<GenresEntity> Genres { get; set; }
         public DbSet<Games_Platforms> Games_Platforms { get; set; }
+        public DbSet<Games_Genres> Games_Genres { get; set; }
 
         public AppDbContext(DbContextOptions options) : base(options)
         {

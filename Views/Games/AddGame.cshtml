@@ -1,20 +1,44 @@
-﻿@model xbox_ps_mvc_project.Entities.GamesEntity
+﻿@model xbox_ps_mvc_project.Models.AddGameViewModel
 @{
     ViewData["Title"] = "AddGame";
 }
 
 <form method="POST" asp-action="GameAdded">
     <div class="form-group">
-        <label asp-for="Title">Title:</label>
-        <input asp-for="Title" class="form-control" required/>
+        <label asp-for="Games.Title">Title:</label>
+        <input asp-for="Games.Title" class="form-control" required/>
     </div>
     <div class="form-group">
-        <label asp-for="PosterUrl">PosterUrl: </label>
-        <input asp-for="PosterUrl" class="form-control" required/>
+        <label asp-for="Games.Description">Description: </label>
+        <input asp-for="Games.Description" class="form-control" required/>
     </div>
     <div class="form-group">
-        <label asp-for="CoverImgUrl">Cover Img Url:</label>
-        <input asp-for="CoverImgUrl" class="form-control" required/>
+        <label asp-for="Games.PosterUrl">PosterUrl: </label>
+        <input asp-for="Games.PosterUrl" class="form-control" required/>
+    </div>
+    <div class="form-group">
+        <label asp-for="Games.CoverImgUrl">Cover Img Url:</label>
+        <input asp-for="Games.CoverImgUrl" class="form-control" required/>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Platforms">Platform</label>
+        <select class="form-control" id="Platforms" name="Platforms" required asp-for="Platforms">
+            @foreach(var item in Model.Platforms)
+            {
+                <option value="@item.Id">@item.PlatformName</option>
+            }
+        </select>
+    </div>
+
+     <div class="form-group">
+        <label asp-for="Genres">Genre</label>
+        <select class="form-control" id="Genres" name="Genres" required asp-for="Genres">
+            @foreach(var item in Model.Genres)
+            {
+                <option value="@item.Id">@item.GenreName</option>
+            }
+        </select>
     </div>
 
     <div class="form-group">
