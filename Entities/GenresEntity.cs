@@ -6,15 +6,13 @@ using System.Threading.Tasks;
 
 namespace xbox_ps_mvc_project.Entities
 {
-    public class PlatformEntity
+    public class GenresEntity
     {
         public int Id { get; set; }
-        public string PlatformName { get; set; }
+        public string GenreName { get; set; }
 
         // Navigations Properties
-        public List<Games_Platforms> Games_Platforms { get; set; }
 
+        public List<Games_Genres> Games_Genres { get; set; }
     }
-
-    
 }

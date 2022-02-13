@@ -30,6 +30,16 @@ namespace xbox_ps_mvc_project.Database
                 .WithMany(gp => gp.Games_Platforms)
                 .HasForeignKey(pi => pi.PlatformId);
 
+            modelBuilder.Entity<Games_Genres>()
+                .HasOne(g => g.Game)
+                .WithMany(gg => gg.Games_Genres)
+                .HasForeignKey(gi => gi.GameId);
+
+            modelBuilder.Entity<Games_Genres>()
+                .HasOne(g => g.Genre)
+                .WithMany(gg => gg.Games_Genres)
+                .HasForeignKey(gi => gi.GenreId);
+
             modelBuilder.Entity<GamesEntity>()
                 .Property(g => g.Id)
                 .IsRequired();
@@ -52,6 +62,19 @@ namespace xbox_ps_mvc_project.Database
                 new PlatformEntity() { Id = 5, PlatformName = "XBOX_SERIES_S" },
                 new PlatformEntity() { Id = 6, PlatformName = "XBOX_ONE_X" },
                 new PlatformEntity() { Id = 7, PlatformName = "XBOX_ONE_S" }
+                );
+
+            modelBuilder.Entity<GenresEntity>()
+                .HasData(
+                    new GenresEntity { Id = 1, GenreName = "Action" },
+                    new GenresEntity { Id = 2, GenreName = "Action role-playing" },
+                    new GenresEntity { Id = 3, GenreName = "Casual game" }
+                );
+
+            modelBuilder.Entity<Games_Genres>()
+                .HasData(
+                    new Games_Genres { Id = 1, GameId = 1, GenreId = 1 },
+                    new Games_Genres { Id = 2, GameId = 1, GenreId = 2 }
                 );
 
             modelBuilder.Entity<Games_Platforms>()
