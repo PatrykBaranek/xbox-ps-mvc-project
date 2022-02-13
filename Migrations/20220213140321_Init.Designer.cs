@@ -11,8 +11,8 @@ using xbox_ps_mvc_project.Database;
 namespace xbox_ps_mvc_project.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220205215534_Init2")]
-    partial class Init2
+    [Migration("20220213140321_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,6 +23,29 @@ namespace xbox_ps_mvc_project.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("xbox_ps_mvc_project.Entities.Games_Platforms", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("GameId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PlatformId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GameId");
+
+                    b.HasIndex("PlatformId");
+
+                    b.ToTable("Games_Platforms");
+                });
+
             modelBuilder.Entity("xbox_ps_mvc_project.Entities.GamesEntity", b =>
                 {
                     b.Property<int>("Id")
@@ -32,19 +55,13 @@ namespace xbox_ps_mvc_project.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Category")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CoverImgUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PlatformId")
-                        .HasMaxLength(25)
-                        .HasColumnType("int");
 
                     b.Property<string>("PosterUrl")
                         .HasColumnType("nvarchar(max)");
@@ -56,18 +73,14 @@ namespace xbox_ps_mvc_project.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PlatformId");
-
                     b.ToTable("Games");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            Category = "Action Game",
                             CoverImgUrl = "https://wallpapercrafter.com/desktop/29964-Dying-Light-2-E3-2018-poster-4K.jpg",
                             Description = "Action Game",
-                            PlatformId = 1,
                             PosterUrl = "https://image.api.playstation.com/vulcan/img/rnd/202106/2908/7aJhOMuJALdBPqZHVy3CgJsg.png",
                             Title = "Dying Light 2"
                         });
@@ -92,44 +105,67 @@ namespace xbox_ps_mvc_project.Migrations
                         new
                         {
                             Id = 1,
-                            PlatformName = "PS5"
+                            PlatformName = "PC"
                         },
                         new
                         {
                             Id = 2,
-                            PlatformName = "PS4"
+                            PlatformName = "PS5"
                         },
                         new
                         {
                             Id = 3,
-                            PlatformName = "XBOX SERIES X"
+                            PlatformName = "PS4"
                         },
                         new
                         {
                             Id = 4,
-                            PlatformName = "XBOX SERIES S"
+                            PlatformName = "XBOX_SERIES_X"
                         },
                         new
                         {
                             Id = 5,
-                            PlatformName = "XBOX ONE S"
+                            PlatformName = "XBOX_SERIES_S"
                         },
                         new
                         {
                             Id = 6,
-                            PlatformName = "XBOX ONE X"
+                            PlatformName = "XBOX_ONE_X"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            PlatformName = "XBOX_ONE_S"
                         });
                 });
 
-            modelBuilder.Entity("xbox_ps_mvc_project.Entities.GamesEntity", b =>
+            modelBuilder.Entity("xbox_ps_mvc_project.Entities.Games_Platforms", b =>
                 {
+                    b.HasOne("xbox_ps_mvc_project.Entities.GamesEntity", "Game")
+                        .WithMany("Games_Platforms")
+                        .HasForeignKey("GameId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("xbox_ps_mvc_project.Entities.PlatformEntity", "Platform")
-                        .WithMany()
+                        .WithMany("Games_Platforms")
                         .HasForeignKey("PlatformId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Game");
+
                     b.Navigation("Platform");
+                });
+
+            modelBuilder.Entity("xbox_ps_mvc_project.Entities.GamesEntity", b =>
+                {
+                    b.Navigation("Games_Platforms");
+                });
+
+            modelBuilder.Entity("xbox_ps_mvc_project.Entities.PlatformEntity", b =>
+                {
+                    b.Navigation("Games_Platforms");
                 });
 #pragma warning restore 612, 618
         }

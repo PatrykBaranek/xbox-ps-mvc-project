@@ -15,8 +15,7 @@ namespace xbox_ps_mvc_project.Entities
         public string PosterUrl { get; set; }
         public string CoverImgUrl { get; set; }
 
-        public int PlatformId { get; set; }
-        public virtual PlatformEntity Platform { get; set; }
-
+        // Navigations Properties
+        public List<Games_Platforms> Games_Platforms { get; set; }
     }
 }

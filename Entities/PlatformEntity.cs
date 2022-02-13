@@ -10,6 +10,11 @@ namespace xbox_ps_mvc_project.Entities
     {
         public int Id { get; set; }
         public string PlatformName { get; set; }
+
+        // Navigations Properties
+
+        public List<Games_Platforms> Games_Platforms { get; set; }
+
     }
 
     
