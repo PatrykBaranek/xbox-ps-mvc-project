@@ -43,8 +43,9 @@ namespace xbox_ps_mvc_project.Services
             return gameViewModel;
         }
 
-        public async Task<GamesEntity> GameAdded(string title, string description, string posterUrl, string coverImgUrl, int platformSelected, int genreSelected)
-        {
+        public async Task<GamesEntity> GameAdded(string title, string description, string posterUrl, string coverImgUrl, List<int> platformSelected, List<int> genreSelected)
+        {  
+
             var newGame = new GamesEntity()
             {
                 Title = title,

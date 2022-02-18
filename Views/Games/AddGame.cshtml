@@ -22,8 +22,8 @@
     </div>
 
     <div class="form-group">
-        <label asp-for="Platforms">Platform</label>
-        <select class="form-control" id="Platforms" name="Platforms" required asp-for="Platforms">
+        <label asp-for="Platforms">Select Platform/Platforms</label>
+        <select class="form-select" id="Platforms" name="Platforms" required asp-for="Platforms">
             @foreach(var item in Model.Platforms)
             {
                 <option value="@item.Id">@item.PlatformName</option>
@@ -32,8 +32,8 @@
     </div>
 
      <div class="form-group">
-        <label asp-for="Genres">Genre</label>
-        <select class="form-control" id="Genres" name="Genres" required asp-for="Genres">
+        <label asp-for="Genres">Select Genre</label>
+        <select class="form-select" id="Genres" name="Genres" required asp-for="Genres">
             @foreach(var item in Model.Genres)
             {
                 <option value="@item.Id">@item.GenreName</option>
@@ -45,3 +45,6 @@
         <input type="submit" value="Add new game"/>
     </div>
 </form>
+
+
+<script src="~/js/addGame.js"></script>

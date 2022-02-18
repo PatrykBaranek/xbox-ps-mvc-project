@@ -11,7 +11,7 @@ using xbox_ps_mvc_project.Database;
 namespace xbox_ps_mvc_project.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220213140321_Init")]
+    [Migration("20220217180539_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -22,6 +22,43 @@ namespace xbox_ps_mvc_project.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("xbox_ps_mvc_project.Entities.Games_Genres", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("GameId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GenreId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GameId");
+
+                    b.HasIndex("GenreId");
+
+                    b.ToTable("Games_Genres");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            GameId = 1,
+                            GenreId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            GameId = 1,
+                            GenreId = 2
+                        });
+                });
 
             modelBuilder.Entity("xbox_ps_mvc_project.Entities.Games_Platforms", b =>
                 {
@@ -44,6 +81,26 @@ namespace xbox_ps_mvc_project.Migrations
                     b.HasIndex("PlatformId");
 
                     b.ToTable("Games_Platforms");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            GameId = 1,
+                            PlatformId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            GameId = 1,
+                            PlatformId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            GameId = 1,
+                            PlatformId = 3
+                        });
                 });
 
             modelBuilder.Entity("xbox_ps_mvc_project.Entities.GamesEntity", b =>
@@ -53,9 +110,6 @@ namespace xbox_ps_mvc_project.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Category")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CoverImgUrl")
                         .HasColumnType("nvarchar(max)");
@@ -83,6 +137,39 @@ namespace xbox_ps_mvc_project.Migrations
                             Description = "Action Game",
                             PosterUrl = "https://image.api.playstation.com/vulcan/img/rnd/202106/2908/7aJhOMuJALdBPqZHVy3CgJsg.png",
                             Title = "Dying Light 2"
+                        });
+                });
+
+            modelBuilder.Entity("xbox_ps_mvc_project.Entities.GenresEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("GenreName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Genres");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            GenreName = "Action"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            GenreName = "Action role-playing"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            GenreName = "Casual game"
                         });
                 });
 
@@ -139,6 +226,25 @@ namespace xbox_ps_mvc_project.Migrations
                         });
                 });
 
+            modelBuilder.Entity("xbox_ps_mvc_project.Entities.Games_Genres", b =>
+                {
+                    b.HasOne("xbox_ps_mvc_project.Entities.GamesEntity", "Game")
+                        .WithMany("Games_Genres")
+                        .HasForeignKey("GameId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("xbox_ps_mvc_project.Entities.GenresEntity", "Genre")
+                        .WithMany("Games_Genres")
+                        .HasForeignKey("GenreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Game");
+
+                    b.Navigation("Genre");
+                });
+
             modelBuilder.Entity("xbox_ps_mvc_project.Entities.Games_Platforms", b =>
                 {
                     b.HasOne("xbox_ps_mvc_project.Entities.GamesEntity", "Game")
@@ -160,7 +266,14 @@ namespace xbox_ps_mvc_project.Migrations
 
             modelBuilder.Entity("xbox_ps_mvc_project.Entities.GamesEntity", b =>
                 {
+                    b.Navigation("Games_Genres");
+
                     b.Navigation("Games_Platforms");
+                });
+
+            modelBuilder.Entity("xbox_ps_mvc_project.Entities.GenresEntity", b =>
+                {
+                    b.Navigation("Games_Genres");
                 });
 
             modelBuilder.Entity("xbox_ps_mvc_project.Entities.PlatformEntity", b =>

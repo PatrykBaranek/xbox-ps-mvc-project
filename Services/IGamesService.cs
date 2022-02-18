@@ -8,6 +8,6 @@ namespace xbox_ps_mvc_project.Services
         Task<IEnumerable<GamesEntity>> Index();
         Task<GamesEntity> GameDetails(int? id);
         Task<AddGameViewModel> AddGame();
-        Task<GamesEntity> GameAdded(string title,string description, string posterUrl, string coverImgUrl, int platformSelected, int genreSelected);
+        Task<GamesEntity> GameAdded(string title,string description, string posterUrl, string coverImgUrl, List<int> platformSelected, List<int> genreSelected);
     }
 }

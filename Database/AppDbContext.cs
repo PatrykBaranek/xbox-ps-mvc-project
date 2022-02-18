@@ -60,10 +60,10 @@ namespace xbox_ps_mvc_project.Database
                 new PlatformEntity() { Id = 1, PlatformName = "PC" },
                 new PlatformEntity() { Id = 2, PlatformName = "PS5" },
                 new PlatformEntity() { Id = 3, PlatformName = "PS4" },
-                new PlatformEntity() { Id = 4, PlatformName = "XBOX_SERIES_X" },
-                new PlatformEntity() { Id = 5, PlatformName = "XBOX_SERIES_S" },
-                new PlatformEntity() { Id = 6, PlatformName = "XBOX_ONE_X" },
-                new PlatformEntity() { Id = 7, PlatformName = "XBOX_ONE_S" }
+                new PlatformEntity() { Id = 4, PlatformName = "XBOX SERIES X" },
+                new PlatformEntity() { Id = 5, PlatformName = "XBOX SERIES S" },
+                new PlatformEntity() { Id = 6, PlatformName = "XBOX ONE X" },
+                new PlatformEntity() { Id = 7, PlatformName = "XBOX ONE S" }
                 );
 
             modelBuilder.Entity<GenresEntity>()
